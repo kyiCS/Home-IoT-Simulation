@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Team 3</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+         <!-- CSS only -->
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+         <link rel="stylesheet" href="../static/css/style.css">
+     </head>
+     <body>
+         <!--[if lt IE 7]>
+             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+         <![endif]-->
+         <!-- JavaScript Bundle with Popper -->
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous" async defer></script>
+         <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
+         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script> -->
+         <script src="{{url_for('static', filename='js/script.js')}}" async defer></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="nav-buttons">
+            <a href="{{url_for('layout')}}" type="button" class="btn btn-success" data-mdb-toggle="button" autocomplete="off" aria-pressed="true">
+                Floor Plan/Theromstat
+            </a>
+            <a href="{{url_for('chart')}}" type="button" class="btn btn-success" data-mdb-toggle="button" autocomplete="off" aria-pressed="true">
+                Water and Power Usage
+            </a>
+            <a href="{{url_for('devices')}}" type="button" class="btn btn-success" data-mdb-toggle="button" autocomplete="off" aria-pressed="true">
+                Devices
+            </a>
+            <!-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+                Simulator
+            </button> -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {{ message }}
+
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {{test}}
+
+        </div>
+            <div class="toggle-div">
+                <h2 class="device mt-5">Master Bedroom</h2>
+                <hr class="hr hr-blurry" />
+                <!-- <form action="/devices" method="post"> -->
+                <form action="/devicesMBOH/" method="post">
+                    <div class="toggle-groups">
+                        <p>Overhead Light</p>
+                        {% if MBOH == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-one" id="device-one" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; align:right" onClick="MasterBedroomOverhead()">Off</button>
+                        <label type="text">Current State: {{MBOH}}</label>
+                        {% elif MBOH == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-one" id="device-one" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-right:0" onClick="MasterBedroomOverhead()">On</button>
+                        <label type="text">Current State: {{ MBOH }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+                <form action="/devicesMBL1/" method="post">
+                    <div class="toggle-groups">
+                        <p>Lamp 1</p>
+                        {% if MBL1 == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-two" id="device-two" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:84px" onClick="MasterBedroomLamp1()">Off</button>
+                        <label type="text">Current State: {{MBL1}}</label>
+                        {% elif MBL1 == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-two" id="device-two" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:84px" onClick="MasterBedroomLamp1()">On</button>
+                        <label type="text">Current State: {{ MBL1 }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+                <form action="/devicesMBL2/" method="post">
+                    <div class="toggle-groups">
+                        <p>Lamp 2</p>
+                        {% if MBL2 == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-three" id="device-three" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:82px" onClick="MasterBedroomLamp2()">Off</button>
+                        <label type="text">Current State: {{MBL2}}</label>
+                        {% elif MBL2 == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-three" id="device-three" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:82px" onClick="MasterBedroomLamp2()">On</button>
+                        <label type="text">Current State: {{ MBL2 }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+                <form action="/devicesMBTV/" method="post">
+                    <div class="toggle-groups">
+                        <p>TV</p>
+                        {% if MBTV == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-four" id="device-four" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:127px" onClick="MasterBedroomTV()">Off</button>
+                        <label type="text">Current State: {{MBTV}}</label>
+                        {% elif MBTV == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-four" id="device-four" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:127px" onClick="MasterBedroomTV()">On</button>
+                        <label type="text">Current State: {{ MBTV }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+                <h2 class="device">Bedroom 2</h2>
+                <hr class="hr hr-blurry" />
+                <form action="/devicesB2OH/" method="post">
+                    <div class="toggle-groups">
+                        <p>Overhead Light</p>
+                        {% if B2OH == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-five" id="device-five" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px" onClick="Bedroom2Overhead()">Off</button>
+                        <label type="text">Current State: {{B2OH}}</label>
+                        {% elif B2OH == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-five" id="device-five" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px" onClick="Bedroom2Overhead()">On</button>
+                        <label type="text">Current State: {{ B2OH }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+                <form action="/devicesB2L1/" method="post">
+                    <div class="toggle-groups">
+                        <p>Lamp 1</p>
+                        {% if B2L1 == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-six" id="device-six" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:84px" onClick="Bedroom2Lamp1()">Off</button>
+                        <label type="text">Current State: {{B2L1}}</label>
+                        {% elif B2L1 == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-six" id="device-six" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:84px" onClick="Bedroom2Lamp1()">On</button>
+                        <label type="text">Current State: {{ B2L1 }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+                <form action="/devicesB2L2/" method="post">
+                    <div class="toggle-groups">
+                        <p>Lamp 2</p>
+                        {% if B2L2 == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-seven" id="device-seven" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:82px" onClick="Bedroom2Lamp2()">Off</button>
+                        <label type="text">Current State: {{B2L2}}</label>
+                        {% elif B2L2 == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-seven" id="device-seven" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:82px" onClick="Bedroom2Lamp2()">On</button>
+                        <label type="text">Current State: {{ B2L2 }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+
+                <h2 class="device">Bedroom 3</h2>
+                <hr class="hr hr-blurry" />
+                <form action="/devicesB3OH/" method="post">
+                    <div class="toggle-groups">
+                        <p>Overhead Light</p>
+                        {% if B3OH == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-eight" id="device-eight" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px" onClick="Bedroom3Overhead()">Off</button>
+                        <label type="text">Current State: {{B3OH}}</label>
+                        {% elif B3OH == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-eight" id="device-eight" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px" onClick="Bedroom3Overhead()">On</button>
+                        <label type="text">Current State: {{ B3OH }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+                <form action="/devicesB3L1/" method="post">
+                    <div class="toggle-groups">
+                        <p>Lamp 1</p>
+                        {% if B3L1 == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-nine" id="device-nine" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:84px" onClick="Bedroom3Lamp1()">Off</button>
+                        <label type="text">Current State: {{B3L1}}</label>
+                        {% elif B3L1 == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-nine" id="device-nine" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:84px" onClick="Bedroom3Lamp1()">On</button>
+                        <label type="text">Current State: {{ B3L1 }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+                <form action="/devicesB3L2/" method="post">
+                    <div class="toggle-groups">
+                        <p>Lamp 2</p>
+                        {% if B3L2 == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-ten" id="device-ten" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:82px" onClick="Bedroom3Lamp2()">Off</button>
+                        <label type="text">Current State: {{B3L2}}</label>
+                        {% elif B3L2 == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-ten" id="device-ten" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:82px" onClick="Bedroom3Lamp2()">On</button>
+                        <label type="text">Current State: {{ B3L2 }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+
+                <h2 class="device">Bathroom 1</h2>
+                <hr class="hr hr-blurry" />
+                <form action="/devicesBath1OH/" method="post">
+                    <div class="toggle-groups">
+                        <p>Overhead Light</p>
+                        {% if Bath1OH == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-eleven" id="device-eleven" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px" onClick="Bathroom1Overhead()">Off</button>
+                        <label type="text">Current State: {{Bath1OH}}</label>
+                        {% elif Bath1OH == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-eleven" id="device-eleven" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px" onClick="Bathroom1Overhead()">On</button>
+                        <label type="text">Current State: {{ Bath1OH }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+                <form action="/devicesBath1EF/" method="post">
+                    <div class="toggle-groups">
+                        <p>Exhaust Fan</p>
+                        {% if Bath1EF == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-twelve" id="device-twelve" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:36px" onClick="Bathroom1ExhaustFan()">Off</button>
+                        <label type="text">Current State: {{Bath1EF}}</label>
+                        {% elif Bath1EF == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-twelve" id="device-twelve" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:36px" onClick="Bathroom1ExhaustFan()">On</button>
+                        <label type="text">Current State: {{ Bath1EF }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+
+                <h2 class="device">Bathroom 2</h2>
+                <hr class="hr hr-blurry" />
+                <form action="/devicesBath2OH/" method="post">
+                    <div class="toggle-groups">
+                        <p>Overhead Light</p>
+                        {% if Bath2OH == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-thirteen" id="device-thirteen" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px" onClick="Bathroom2Overhead()">Off</button>
+                        <label type="text">Current State: {{Bath2OH}}</label>
+                        {% elif Bath2OH == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-thirteen" id="device-thirteen" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px" onClick="Bathroom2Overhead()">On</button>
+                        <label type="text">Current State: {{ Bath2OH }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+                <form action="/devicesBath2EF/" method="post">
+                    <div class="toggle-groups">
+                        <p>Exhaust Fan</p>
+                        {% if Bath2EF == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-fourteen" id="device-fourteen" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:36px" onClick="Bathroom2ExhaustFan()">Off</button>
+                        <label type="text">Current State: {{Bath2EF}}</label>
+                        {% elif Bath2EF == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-fourteen" id="device-fourteen" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:36px" onClick="Bathroom2ExhaustFan()">On</button>
+                        <label type="text">Current State: {{ Bath2EF }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+
+                <h2 class="device">Garage</h2>
+                <hr class="hr hr-blurry" />
+                <form action="/devicesGD1/" method="post">
+                    <div class="toggle-groups">
+                        <p>Garage Door 1</p>
+                        {% if GD1 == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-fifteen" id="device-fifteen" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:17px" onClick="GarageDoor1()">Off</button>
+                        <label type="text">Current State: {{GD1}}</label>
+                        {% elif GD1 == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-fifteen" id="device-fifteen" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:17px" onClick="GarageDoor1()">On</button>
+                        <label type="text">Current State: {{ GD1 }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+                <form action="/devicesGD2/" method="post">
+                    <div class="toggle-groups">
+                        <p>Garage Door 2</p>
+                        {% if GD2 == "on" %}
+                        <button type="submit" value="On" class="devices" name="device-sixteen" id="device-sixteen" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:15px" onClick="GarageDoor2()">Off</button>
+                        <label type="text">Current State: {{GD2}}</label>
+                        {% elif GD2 == "off" %}
+                        <button type="submit" value="Off" class="devices" name="device-sixteen" id="device-sixteen" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:15px" onClick="GarageDoor2()">On</button>
+                        <label type="text">Current State: {{ GD2 }}</label>
+                        {% endif %}
+                    </div>
+                </form>
+
+                  <h2 class="device">Living Room</h2>
+                  <hr class="hr hr-blurry" />
+                  <form action="/devicesLROH/" method="post">
+                      <div class="toggle-groups">
+                          <p>Overhead Light</p>
+                          {% if LROH == "on" %}
+                          <button type="submit" value="On" class="devices" name="device-seventeen" id="device-seventeen" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px" onClick="LivingRoomOverhead()">Off</button>
+                          <label type="text">Current State: {{LROH}}</label>
+                          {% elif LROH == "off" %}
+                          <button type="submit" value="Off" class="devices" name="device-seventeen" id="device-seventeen" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px" onClick="LivingRoomOverhead()">On</button>
+                          <label type="text">Current State: {{ LROH }}</label>
+                          {% endif %}
+                      </div>
+                  </form>
+                  <form action="/devicesLRL1/" method="post">
+                      <div class="toggle-groups">
+                          <p>Lamp 1</p>
+                          {% if LRL1 == "on" %}
+                          <button type="submit" value="On" class="devices" name="device-eighteen" id="device-eighteen" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:84px" onClick="LivingRoomLamp1()">Off</button>
+                          <label type="text">Current State: {{LRL1}}</label>
+                          {% elif LRL1 == "off" %}
+                          <button type="submit" value="Off" class="devices" name="device-eighteen" id="device-eighteen" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:84px" onClick="LivingRoomLamp1()">On</button>
+                          <label type="text">Current State: {{ LRL1 }}</label>
+                          {% endif %}
+                      </div>
+                  </form>
+                  <form action="/devicesLRL2/" method="post">
+                      <div class="toggle-groups">
+                          <p>Lamp 2</p>
+                          {% if LRL2 == "on" %}
+                          <button type="submit" value="On" class="devices" name="device-nineteen" id="device-nineteen" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:82px" onClick="LivingRoomLamp2()">Off</button>
+                          <label type="text">Current State: {{LRL2}}</label>
+                          {% elif LRL2 == "off" %}
+                          <button type="submit" value="Off" class="devices" name="device-nineteen" id="device-nineteen" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:82px" onClick="LivingRoomLamp2()">On</button>
+                          <label type="text">Current State: {{ LRL2 }}</label>
+                          {% endif %}
+                      </div>
+                  </form>
+                  <form action="/devicesLRTV/" method="post">
+                      <div class="toggle-groups">
+                          <p>TV</p>
+                          {% if LRTV == "on" %}
+                          <button type="submit" value="On" class="devices" name="device-twenty" id="device-twenty" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:127px" onClick="LivingRoomTV()">Off</button>
+                          <label type="text">Current State: {{LRTV}}</label>
+                          {% elif LRTV == "off" %}
+                          <button type="submit" value="Off" class="devices" name="device-twenty" id="device-twenty" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:127px" onClick="LivingRoomTV()">On</button>
+                          <label type="text">Current State: {{ LRTV }}</label>
+                          {% endif %}
+                      </div>
+                  </form>
+                  <form action="/devicesHVAC/" method="post">
+                      <div class="toggle-groups">
+                          <p>HVAC</p>
+                          {% if HVAC == "on" %}
+                          <button type="submit" value="On" class="devices" name="device-twentyone" id="device-twentyone" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:96px" onClick="HVAC()">Off</button>
+                          <label type="text">Current State: {{HVAC}}</label>
+                          {% elif HVAC == "off" %}
+                          <button type="submit" value="Off" class="devices" name="device-twentyone" id="device-twentyone" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:96px" onClick="HVAC()">On</button>
+                          <label type="text">Current State: {{ HVAC }}</label>
+                          {% endif %}
+                      </div>
+                  </form>
+
+                  <h2 class="device">Kitchen</h2>
+                  <hr class="hr hr-blurry" />
+                  <form action="/devicesKOL/" method="post">
+                      <div class="toggle-groups">
+                         <p>Overhead Light</p>
+                         {% if KOL == "on" %}
+                         <button type="submit" value="On" class="devices" name="device-twentytwo" id="device-twentytwo" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px" onClick="HVAC()">Off</button>
+                         <label type="text">Current State: {{ KOL }}</label>
+                         {% elif KOL == "off" %}
+                         <button type="submit" value="Off" class="devices" name="device-twentytwo" id="device-twentytwo" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px" onClick="HVAC()">On</button>
+                         <label type="text">Current State: {{ KOL }}</label>
+                         {% endif %}
+                      </div>
+                   </form>
+                     <div class="toggle-groups">
+                         <p>Refridgerator</p>
+                         <button type="submit" value="On" class="devices" name="device-twentythree" id="device-twentythree" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:32px" onClick="HVAC()">Off</button>
+                         <label type="text">Current State: on</label>
+                     </div>
+                     <div class="toggle-groups">
+                         <p>Dishwasher</p>
+                         <button type="submit" value="Off" class="devices" name="device-twentyfour" id="device-twentyfour" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:47px" onClick="HVAC()">On</button>
+                         <label type="text">Current State: off</label>
+                     </div>
+                   <form action="/devicesStove" method="post">
+                     <div class="toggle-groups">
+                         <p>Stove</p>
+                         {% if stove == "on" %}
+                         <button type="submit" value="On" class="devices" name="device-twentyfive" id="device-twentyfive" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:98px" onClick="Stove()">Off</button>
+                         <label type="text">Current State: {{ stove }}</label>
+                         {% elif stove == "off" %}
+                         <button type="submit" value="Off" class="devices" name="device-twentyfive" id="device-twentyfive" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:98px" onClick="Stove()">On</button>
+                         <label type="text">Current State: {{ stove }}</label>
+                         {% endif %}
+                     </div>
+                   </form>
+                   <form action="/devicesOven" method="post">
+                     <div class="toggle-groups">
+                         <p>Oven</p>
+                         {% if oven == "on" %}
+                         <button type="submit" value="On" class="devices" name="device-twentysix" id="device-twentysix" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:100px" onClick="HVAC()">Off</button>
+                         <label type="text">Current State: {{ oven }}</label>
+                         {% elif oven == "off" %}
+                         <button type="submit" value="Off" class="devices" name="device-twentysix" id="device-twentysix" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:100px" onClick="HVAC()">On</button>
+                         <label type="text">Current State: {{ oven }}</label>
+                         {% endif %}
+                     </div>
+                   </form>
+                   <form action="/devicesMicrowave" method="post">
+                     <div class="toggle-groups">
+                         <p>Microwave</p>
+                         {% if micro == "on" %}
+                         <button type="submit" value="On" class="devices" name="device-twentyseven" id="device-twentyseven" data-width="150" style="width:75px; height:25px; background-color:rgb(255,0,0); border-radius:6px; margin-left:44px" onClick="HVAC()">Off</button>
+                         <label type="text">Current State: {{ micro }}</label>
+                         {% elif micro == "off" %}
+                         <button type="submit" value="Off" class="devices" name="device-twentyseven" id="device-twentyseven" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:44px" onClick="HVAC()">On</button>
+                         <label type="text">Current State: {{ micro }}</label>
+                         {% endif %}
+                     </div>
+                   </form>
+                 <h2 class="device">Laundry Room</h2>
+                 <hr class="hr hr-blurry" />
+                     <div class="toggle-groups">
+                         <p>Clothes Washer</p>
+                         <button type="submit" value="Off" class="devices" name="device-twentyeight" id="device-twentyeight" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:5px" onClick="HVAC()">On</button>
+                         <label type="text">Current State: off</label>
+                     </div>
+                     <div class="toggle-groups">
+                         <p>Clothes Dryer</p>
+                         <button type="submit" value="Off" class="devices" name="device-twentynine" id="device-twentynine" data-width="150" style="width:75px; height:25px; background-color:rgb(124,252,0); border-radius:6px; margin-left:25px" onClick="HVAC()">On</button>
+                         <label type="text">Current State: off</label>
+                     </div>
+                <!-- </form> -->
+            </div>
+        <script>
+          //var checkbox = document.querySelector('[type="checkbox"]');
+          //alert(cb.checked); // false
+          //checkbox = document.getElementById('device-one')
+          //checkbox.addEventListener('change', e => {
+
+          //if(e.target.checked){
+            //alert("Checked");
+    //}
+          //});
+            //JS function to accept data from input element and send it to the backend using POST request
+          //function toggledevice(element){
+                //alert(name + " was clicked");           //alert call to test that the function is receiving that data
+                //$.ajax({
+                //    url: '/toggledevice',
+                //    type: 'get',
+                //    data: {
+                //        id: id
+                //    },
+                //    success: function(response) {
+                //        $(id).text(response)
+                //    }
+                //});
+
+                //or
+
+            //$.post( '/toggledevice', {
+                //device: $(element).name()});
+          //};
+
+                //or
+
+            //$('#device-one').change(function(){
+            //    $.ajax({
+            //        url: '/toggledevice',
+            //        type: 'get',
+            //        contentType: 'application/json',
+            //        data: {
+            //            device: $(this).text(id)
+            //        },
+            //        success: function(response){
+            //
+            //}
+//
+            //    })
+//
+            //})
+        </script>
+
+        <!-- <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body small">
+        </div>
+        </div> -->
+        <!-- <script src="script.js" async defer> -->
+
+        <!--</script> -->
+    </body>
+</html>

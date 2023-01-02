@@ -1,0 +1,2 @@
+FLASK_APP=home
+FLASK_DEBUG=1

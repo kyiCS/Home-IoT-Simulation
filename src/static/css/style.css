@@ -1,0 +1,125 @@
+html{
+  overflow-y: scroll;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    overflow: hidden;
+}
+.nav-buttons{
+    width: 13em;
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+}
+.nav-buttons a, .nav-buttons button{
+    margin: 1px 1px 0 1px;
+}
+/* form{
+    width: 50%;
+    margin: 15em auto;
+} */
+.floorplan{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#svg-container{
+    width: 75%;
+}
+#thermostat{
+    width: 25%;
+    text-align: center;
+    border: black solid 2px;
+    border-radius: 5px;
+    margin-top: 2em;
+}
+#thermostat button{
+    width: 45%;
+}
+.thermostat-title{
+    margin: 1em 0;;
+}
+.temps{
+    font-size: 3em;
+}
+svg{
+    stroke: black;
+    stroke-width: 5px;
+}
+
+.chart-buttons{
+    display: flex;
+    position: relative;
+    top: 5em;
+    left: 20%;
+}
+.btn-1{
+    border-radius: 5px 0 0 5px;
+}
+.btn-2{
+    border-radius: 0 5px 5px 0;
+}
+label.btn.btn-primary.toggle-on{
+    background-color: green;
+} */
+label.btn.btn-default.active.toggle-off{
+    background-color: #d6d6d6;
+    border: solid lightgray 1px;
+    border-radius: 3px;
+}
+
+button.chart{
+    width: 6em;
+    background-color: #d6d6d6;
+}
+button.chart:active{
+    background-color: #00b146;
+}
+.chart-div{
+    width: 60%;
+    margin: 5em auto 0;
+}
+.table{
+    width: 90%;
+    margin: 3em auto 0;
+}
+.toggle-div{
+    width: 50%;
+    margin: auto;
+}
+.device{
+    position: relative;
+    right: 2em;
+}
+div.toggle.btn.btn-default.off{
+    border: lightgray solid 1px;
+    background-color: #d6d6d6;
+}
+span.toggle-handle.btn.btn-default{
+    background-color: white;
+}
+.toggle-groups{
+    height: 2.7em;
+    display: flex;
+    justify-content: space-between;
+}
+.toggle-groups p{
+    margin-right: 2em;
+    font-size: 1.5em;
+}
+.toggle-exits{
+    text-align: center;
+}
+.toggle-exits p{
+    font-size: 1.5em;
+}
+.offcanvas-body.small{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

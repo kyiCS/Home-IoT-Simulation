@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Team 3</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+         <!-- CSS only -->
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+         <link rel="stylesheet" href="../static/css/style.css">
+         <!-- <link rel="stylesheet" href="../static/css/styles.css"> -->
+     </head>
+     <body>
+         <!--[if lt IE 7]>
+             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+         <![endif]-->
+         <!-- JavaScript Bundle with Popper -->
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous" async defer></script>
+         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+         <script src="{{url_for('static', filename='js/script.js')}}" async defer></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="nav-buttons">
+            <a href="{{url_for('layout')}}" type="button" class="btn btn-success" data-mdb-toggle="button" autocomplete="off" aria-pressed="true">
+                Floor Plan/Theromstat
+            </a>
+            <a href="{{url_for('chart')}}" type="button" class="btn btn-success" data-mdb-toggle="button" autocomplete="off" aria-pressed="true">
+                Water and Power Usage
+            </a>
+            <a href="{{url_for('devices')}}" type="button" class="btn btn-success" data-mdb-toggle="button" autocomplete="off" aria-pressed="true">
+                Devices
+            </a>
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+                Simulator
+            </button>
+        </div>
+        <div class="container floorplan">
+            <div id="svg-container">
+                <svg width="100%" height="100%" viewBox="0 0 2224 1668" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                    <rect x="1660" y="196" width="389" height="403" {%  if B2OH == "off" %} style="fill:rgb(0,0,0); stroke-width:24; stroke:rgb(255,0,0);" {% elif B2OH == "on" %} style="fill:rgb(255,255,0); stroke-width:24; stroke:rgb(255,0,0);" {% endif %} /> <!-- Bedroom 2 -->
+                    <g transform="matrix(1,0,0,1,2,415)">
+                        <rect x="1660" y="196" width="389" height="403" {%  if B3OH == "off" %} style="fill:rgb(0,0,0); stroke-width:24; stroke:rgb(255,0,0);" {% elif B3OH == "on" %} style="fill:rgb(255,255,0); stroke-width:24; stroke:rgb(255,0,0);" {% endif %} /> <!-- Bedroom 3 -->
+                    </g>
+                    <g transform="matrix(1,0,0,1,-34,-29)">
+                        <rect x="1917" y="1057" width="166" height="340" {%  if Bath2OH == "off" %} style="fill:rgb(0,0,0); stroke-width:24; stroke:rgb(255,0,0);" {% elif Bath2OH == "on" %} style="fill:rgb(255,255,0); stroke-width:24; stroke:rgb(255,0,0);" {% endif %}/> <!-- bathroom 2 -->
+                    </g>
+                    <path id="living-room" d="M515,1210L515,853L349,853L349,1151L161,1151L161,1612L408,1612L408,1613L797,1613L797,1210L515,1210Z" {%  if MBOH == "off" %} style="fill:rgb(0,0,0); stroke-width:24; stroke:rgb(255,0,0);" {% elif MBOH == "on" %} style="fill:rgb(255,255,0); stroke-width:24; stroke:rgb(255,0,0);" {% endif %}/> <!-- Master Bedroom -->
+                    <g transform="matrix(1,0,0,0.847059,-1752,-43.3412)">
+                        <rect x="1917" y="1057" width="166" height="340" {%  if Bath1OH == "off" %} style="fill:rgb(0,0,0); stroke-width:24; stroke:rgb(255,0,0);" {% elif Bath1OH == "on" %} style="fill:rgb(255,255,0); stroke-width:24; stroke:rgb(255,0,0);" {% endif %}/> <!-- bathroom 1 -->
+                    </g>
+                    <path id="bedroom" d="M1646,1029L1646,195L536,195L536,1190L819,1190L819,1381L818,1381L818,1612L2048,1612L2048,1381L1869,1381L1869,1029L1646,1029Z" {%  if LROH == "off" and (FD == "open" or BD == "open" or GD == "open") %} style="fill:rgb(0,0,0); stroke:rgb(124,252,0); stroke-width:24;"
+                                                                                                                                                                       {%  elif LROH == "off" and (FD == "close" or BD == "close" or GD == "close") %} style="fill:rgb(0,0,0); stroke:rgb(255,0,0); stroke-width:24;"
+                                                                                                                                                                       {%  elif LROH == "on" and (FD == "open" or BD == "open" or GD == "open") %} style="fill:rgb(255,255,0); stroke:rgb(124,252,0); stroke-width:24;"
+                                                                                                                                                                       {%  elif LROH == "on" and (FD == "close" or BD == "close" or GD == "close") %} style="fill:rgb(255,255,0); stroke:rgb(255,0,0); stroke-width:24;"
+                                                                                                                                                                       {% endif %}/> <!-- living room -->
+                </svg>
+            </div>
+            <div id="thermostat">
+                <h2>Thermostat</h2>
+
+                <div>
+                    <p class="thermostat-title">Thermostat Temperature</p>
+                    <p class="temps"><input type="text" pattern="*/d" id="set-temp" value="{{threshold}}" name="set-temp" maxlength="2" size="2" /> &#8457;</p>
+                        <input type="button" onClick="decreaseTemp()" id="decrease-temp" class="thermostat-btn btn btn-success" value="-" />
+                        <input type="button" onClick="increaseTemp()" id="increase-temp" class="thermostat-btn btn btn-success" value="+" />
+                        <!-- form action="{{ url_for('getThreshold') }}" method="POST" -->
+                        <div>
+                            <button type="submit" onClick="passTemp()" name="set" style="margin-top: 5px; height:25px; background-color:#00b146; color: white; border-radius: 6px; boder-color: #00b146;">Set</button>
+                        </div>
+                        <!-- /form --> 
+                </div>
+                <div>
+                    <p class="thermostat-title">Outside Temperature</p>
+                    <p class="temps"><span id="outside-temp">{{outside}}</span> &#8457;</p>
+                </div>
+                <div>
+                    <p class="thermostat-title">Inside Temperature</p>
+                    <p class="temps"><span>{{inside}}</span> &#8457;</p>
+                </div>
+            </div>
+        </div>
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+            <div class="offcanvas-header">
+
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body small" style="display: flex">
+              <form action="/runClothesWasherAndDryer/" method="post">
+                      <p style="font-size: 26px">Wash and Dry a Load of Clothes</p>
+                      <button type="submit" style="height:50px; width: 150px; font-size: 25px; margin-top: -3px; margin-left: 100px; background-color:#00b146; color: white; border-radius: 6px; boder-color: #00b146;" onClick="RunClothesWasherAndDryer()">Simulate</button>
+              </form>
+              <form action="/runDishwasher/" method="post">
+                      <p style="font-size: 26px">Run Dishwasher for 45 Minutes</p>
+                      <button type="submit" style="height:50px; width: 150px; font-size: 25px; margin-top: -3px; margin-left: 100px; background-color:#00b146; color: white; border-radius: 6px; boder-color: #00b146;" onClick="RunDishwasher()">Simulate</button>
+              </form>
+              <form action="/layoutFD/" method="post">
+                  <p style="font-size: 26px">Front Door Controller</p>
+                      {% if FD == "open" %}
+                      <button type="submit" value="Open" name="device-one" id="device-one" style="height:50px; width: 150px; font-size: 25px; margin-top: -3px; margin-left:35px; background-color:rgb(255,0,0); border-radius:6px;" onClick="MasterBedroomOverhead()">Close</button>
+                      {% elif FD == "close" %}
+                      <button type="submit" value="Close" name="device-one" id="device-one" style="height:50px; width: 150px; font-size: 25px; margin-top: -3px;margin-left:35px; background-color:rgb(124,252,0); border-radius:6px;" onClick="MasterBedroomOverhead()">Open</button>
+                      {% endif %}
+              </form>
+            </div>
+            </div>
+        </div>
+        <!-- <script src="script.js" async defer> -->
+
+        </script>
+    </body>
+</html>
+
+<script>
+    function increaseTemp(){
+        var value = parseInt(document.getElementById('set-temp').value, 10);
+        value = isNaN(value) ? 80 : value;
+        value++;
+        document.getElementById('set-temp').value = value;
+    }
+
+    function decreaseTemp(){
+        var value = parseInt(document.getElementById('set-temp').value, 10);
+        value = isNaN(value) ? 59 : value;
+        value--;
+        document.getElementById('set-temp').value = value;
+    }
+
+    function passTemp() {
+        $.ajax({
+          type: "POST",
+          url: "/thermostat/",
+          data: {'threshold': document.getElementById('set-temp').value},
+        })
+    }
+</script>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Team 3</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+         <!-- CSS only -->
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+         <link rel="stylesheet" href="../static/css/style.css">
+         <!-- <link rel="stylesheet" href="../static/css/styles.css"> -->
+     </head>
+     <body>
+         <!--[if lt IE 7]>
+             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+         <![endif]-->
+         <!-- JavaScript Bundle with Popper -->
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous" async defer></script>
+         <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
+         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+         <!-- <script src="chart.js" async defer></script> -->
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+         <!-- <script src="{{url_for('static', filename='js/chart.js')}}" async defer></script> -->
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="nav-buttons">
+            <a href="{{url_for('layout')}}" type="button" class="btn btn-success" data-mdb-toggle="button" autocomplete="off" aria-pressed="true">
+                Floor Plan/Theromstat
+            </a>
+            <a href="{{url_for('chart')}}" type="button" class="btn btn-success" data-mdb-toggle="button" autocomplete="off" aria-pressed="true">
+                Water and Power Usage
+            </a>
+            <a href="{{url_for('devices')}}" type="button" class="btn btn-success" data-mdb-toggle="button" autocomplete="off" aria-pressed="true">
+                Devices
+            </a>
+            <!-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+                Simulator
+            </button> -->
+        </div>
+        <div class="chart-buttons">
+            <!-- <button id="chart-button-one" class="btn btn-1 chart" type="button">Yearly</button> -->
+            <!-- <button id="chart-button-two" class="btn btn-2 chart" type="button">Monthly</button> -->
+            <label for="Years" style="margin-top: 0px;">Choose a Year:&nbsp;&nbsp;</label>
+            <select name="Year" id="Years" style="margin-top: 3px">
+                <option value="2022">2022</option>
+            </select>
+            &nbsp;&nbsp;
+            <form action="/yearlychart/" method="post">
+                <button type="submit" style="height:26px; width: 125px; margin-top: -3px; background-color:#00b146; color: white; border-radius: 6px; boder-color: #00b146;" onClick="yearlyData()">Select Year</button>
+            </form>
+            <label for="Months" style="margin-top: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;Choose a Month:&nbsp;&nbsp;</label>
+            <form class = "selectMonth" method="POST" action="/monthlychart/" name="select">
+                <select name="Month" id="Months">
+                    <option value="January" {%  if selection == "January" %} selected {% endif %}>January</option>
+                    <option value="Febuary" {%  if selection == "Febuary" %} selected {% endif %}>Febuary</option>
+                    <option value="March" {%  if selection == "March" %} selected {% endif %}>March</option>
+                    <option value="April" {%  if selection == "April" %} selected {% endif %}>April</option>
+                    <option value="May" {%  if selection == "May" %} selected {% endif %}>May</option>
+                    <option value="June" {%  if selection == "June" %} selected {% endif %}>June</option>
+                    <option value="July" {%  if selection == "July" %} selected {% endif %}>July</option>
+                    <option value="August" {%  if selection == "August" %} selected {% endif %}>August</option>
+                    <option value="September" {%  if selection == "September" %} selected {% endif %}>September</option>
+                    <option value="October" {%  if selection == "October" %} selected {% endif %}>October</option>
+                    <option value="November" {%  if selection == "November" %} selected {% endif %}>November</option>
+                    <option value="December" {%  if selection == "December" %} selected {% endif %}>December</option>
+                </select>
+            <!-- </form> -->
+            &nbsp;&nbsp;
+            <form action="/monthlychart/" method="post">
+                <button type="submit" style="height:26px; width: 125px; margin-top: -3px; background-color:#00b146; color: white; border-radius: 6px; boder-color: #00b146;" onClick="monthlyData()">Select Month</button>
+            </form>
+          </div>
+        <div class="chart-div">
+            <canvas id="myChart"></canvas>
+            <script>
+            // labels = {{ labels }};
+
+            data = {
+              labels: {{ labels1 | safe }},
+              datasets: [{
+                label: 'Power Usage',
+                data: {{ values1 }},
+                fill: false,
+                borderColor: 'rgb(255, 0, 0)',
+                tension: 0.1
+              },
+              {
+                label: 'Water Usage',
+                data: {{ values2 }},
+                fill: false,
+                borderColor: 'rgb(0, 0, 255)',
+                tension: 0.1
+                }
+              ]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Monthly - Usage',
+                            font: {
+                                size: 18
+                            }
+                        }
+                    }
+                }
+            };
+
+            const myChart = new Chart(document.getElementById('myChart'), config);
+            </script>
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Day</th>
+                <th scope="col">Water Usage(cubic feet)</th>
+                <th scope="col">Water Cost</th>
+                <th scope="col">Power Usage(kwh)</th>
+                <th scope="col">Power Cost</th>
+                <th scope="col">Total Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+              {% for x in all %}
+                {% for cell in x %}
+                <td>{{ cell }}</td>
+                {% endfor %}
+              </tr>
+              {% endfor %}
+              <tr>
+                <!-- <th scope="row">Febuary</th>
+                <td>69</td>
+                <td>$146</td>
+                <td>1057</td>
+                <td>$178</td>
+                <td>$324</td>
+              </tr> -->
+
+            </tbody>
+          </table>
+
+        <!-- <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body small">
+        </div>
+        </div> -->
+        <!-- <script src="https://d3js.org/d3.v7.min.js" async defer></script> -->
+        <!-- <script src="script.js" async defer></script> -->
+    </body>
+</html>
