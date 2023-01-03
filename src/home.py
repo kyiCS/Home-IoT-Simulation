@@ -33,7 +33,7 @@ inside = GetState.Inside_State()
 outside = GetState.Outside_State()
 
 # weather API stuff
-api_key="b2916bd1be6ef042718a5e53121fb584"
+api_key="" # your own api key
 base_url = "http://api.openweathermap.org/data/2.5/weather?"
 complete_url = base_url + "appid=" + api_key + "&q=" + "Birmingham"
 
