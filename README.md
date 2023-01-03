@@ -16,6 +16,8 @@ This web application was created by 5 UAB students as our final Capstone project
 
 To run this program, download the `src` folder. Download the requirements in the `requirements.txt`, and `flask run` in the terminal.
 
+You will need to insert your own OpenWeatherMap API key in the `home.py` file. You can make a free account on the website and get the key there.
+
 #### Screenshots:
 ![main](/main.PNG)
 ![graph](/graph.png)
