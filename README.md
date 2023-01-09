@@ -1,4 +1,4 @@
-# Home-IoT-Simulation
+# Smart-Home-IoT-Simulation
 By Trebor Bearden, Adrian Hilton, Kali Mcintire, Trevin Rodda, and Kelvin Yi.
 *************
 This web application was created by 5 UAB students as our final Capstone project. In this project, we wanted to creata a web app that simulates an IoT smart home. Our tech stack includes PostgreSQL for the database, Flask for the backend, and plain JS/HTML/CSS for the frontend. 
